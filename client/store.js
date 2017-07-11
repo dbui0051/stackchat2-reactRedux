@@ -99,14 +99,14 @@ export function fetchChannels() {
     }
 }
 
-export function postChannel() {
+export function postChannel(channel) {
     return function thunk(dispatch) {
-        return axios.post('/api/channels')
+        return axios.post('/api/channels', channel)
             .then(res => res.data)
-            .then(channel => {
-                const action = getChannel(channel);
+            .then(newChannel => {
+                const action = getChannel(newChannel);
                 dispatch(action);
-                socket.emit('new-channel', channel);
+                socket.emit('new-channel', newChannel);
             })
     }
 }
@@ -177,11 +177,11 @@ function reducer(state = initialState, action) {
                 newChannelEntry: action.newChannelEntry
             };
 
-        // case GET_CHANNEL:
-        //     return {
-        //         ...state,
-        //         newChannelEntry: action.newChannelEntry
-        //     };
+        case GET_CHANNEL:
+            return {
+                ...state,
+                channels: [...state.channels, action.newChannelEntry]
+            };
 
         default:
             return state;
