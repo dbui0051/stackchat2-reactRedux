@@ -18,9 +18,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         },
         handleSubmit (event) {
             event.preventDefault();
-            dispatch(postChannel({name: event.target.channelName.value}));
+            dispatch(postChannel({name: event.target.channelName.value}, ownProps.history));
             dispatch(addChannel(''));
-            ownProps.history.push();
         }
     };
 }
