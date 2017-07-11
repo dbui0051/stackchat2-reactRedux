@@ -1,5 +1,5 @@
 import axios from 'axios';
-import socket from '../../socket';
+import socket from '../socket';
 
 const GET_MESSAGES = 'GET_MESSAGES';
 const GET_MESSAGE = 'GET_MESSAGE'
