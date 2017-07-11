@@ -39,23 +39,17 @@ export function postMessage(message) {
     }
 }
 
-export default function reducer(state = initialState, action) {
+export default function reducer(previousMessages = [], action) {
 
     switch (action.type) {
         case GET_MESSAGES:
-            return {
-                ...state,
-                messages: action.messages
-            }
+            return action.messages;
 
         case GET_MESSAGE:
-            return {
-                ...state,
-                messages: [...state.messages, action.message]
-            }
-            
+            return [...previousMessages, action.message];
+
         default:
-            return state;
+            return previousMessages;
     }
 
 }
